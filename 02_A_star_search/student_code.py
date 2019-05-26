@@ -55,7 +55,7 @@ class PathItem(object):
             self.current_path_len += path_length_between_2_points(self.path_points_dict[self.path_points[currentLen - 1]], pointXY)
         
         self.evaluated_result = self.current_path_len + estimated_distance   
-#         print("【addPathPoint】current_path_len:%f, estimated_distance:%f, evaluated_result:%f" %(self.current_path_len, estimated_distance, self.evaluated_result))  
+
         self.path_points.append(point_index)
         self.frontier_index = point_index
         self.path_points_dict[point_index] = pointXY
@@ -70,7 +70,7 @@ class PathItem(object):
         if pointSize > 0:
             expandedPath.current_path_len += path_length_between_2_points(expandedPath.path_points_dict[expandedPath.path_points[pointSize - 1]], pointXY)
         expandedPath.evaluated_result = expandedPath.current_path_len + estimated_distance
-#         print("【expandPath】current_path_len:%f, estimated_distance:%f, evaluated_result:%f" %(expandedPath.current_path_len, estimated_distance, #expandedPath.evaluated_result))    
+  
         expandedPath.path_points.append(point_index)
         expandedPath.frontier_index = point_index
         expandedPath.path_points_dict[point_index] = pointXY
@@ -113,7 +113,7 @@ def shortest_path(M,start,goal):
             for i in range(len(roads)):
                 #1.不能拓展已经搜索过的交叉点(已经添加到路径中的节点); 2.排除闭环路径(不能再进行拓展的路径)  
                 diffSet = pathPointSet.symmetric_difference(set(M.roads[roads[i]]))#路径边缘节点的下一个节点的roads的不重复的元素集合
-                if not(roads[i] in pathPointSet) and not(len(diffSet) == 0):#要是diffSet等于0，则会行程闭环路径
+                if not(roads[i] in pathPointSet) and not(len(diffSet) == 0):#要是diffSet等于0，则会形成闭环路径
                     expandedPath = shortestPath.expandPath(roads[i], M.intersections[roads[i]], M.intersections[goal])
                     if count == 0:
                         expandedPathDict[shortestPathIndex] = expandedPath
@@ -126,10 +126,8 @@ def shortest_path(M,start,goal):
             #拓展路径后，重新确定f(path)最小的路径
             for key in expandedPathDict:
                 shortestPath = expandedPathDict[shortestPathIndex]
-                #print("%d: %s" %(key,str(expandedPathDict[key])) )
                 if expandedPathDict[key].evaluated_result <= shortestPath.evaluated_result:
                     shortestPathIndex = key
-            #print("========")
 
             #当路径已经拓展到目的地，且已经拓展到目的地的路径的评估结果(f(path) = path cost so far + estimated distance) 的值最小时,结束循环
             if(goal in set(expandedPathDict[shortestPathIndex].path_points)):
@@ -144,3 +142,4 @@ def shortest_path(M,start,goal):
 #chiangchuna@gmail.com
 #May 25, 2019  20:52 
 #May 26, 2019  22:16 
+
