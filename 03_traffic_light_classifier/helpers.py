@@ -3,7 +3,7 @@
 import os
 import glob # library for loading images from a directory
 import matplotlib.image as mpimg
-
+import numpy as np
 
 
 # This function loads in images and their labels and places them in a list
@@ -32,4 +32,17 @@ def load_dataset(image_dir):
 
     return im_list
 
+# Find the average Value or brightness of an image
+def avg_brightness(rgb_image):
+    
+    # Convert image to HSV
+    hsv = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2HSV)
 
+    # Add up all the pixel values in the V channel
+    sum_brightness = np.sum(hsv[:,:,2])
+    
+    ## TODO: Calculate the average brightness using the area of the image
+    # and the sum calculated above
+    avg = sum_brightness/(hsv.shape[0]*hsv.shape[1])
+    
+    return avg

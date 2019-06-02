@@ -47,11 +47,12 @@ class Tests(unittest.TestCase):
     # Tests if any misclassified images are red but mistakenly classified as green
     def test_red_as_green(self, misclassified_images):
         # Loop through each misclassified image and the labels
+        #i = 0
         for im, predicted_label, true_label in misclassified_images:
-            
+            #i+=1
             # Check if the image is one of a red light
             if(true_label == [1,0,0]):
-                
+                #print("Index:"+str(i))
                 try:
                     # Check that it is NOT labeled as a green light
                     self.assertNotEqual(predicted_label, [0, 0, 1])
