@@ -97,7 +97,7 @@ def hls_select(img, thresh=(0, 255)):
     # 2) Apply a threshold to the S channel
     S = hls[:,:,2]
     binary_output = np.zeros_like(S)
-    binary_output[(S >= thresh[0]) & (S <= thresh[1])] = 1
+    binary_output[(S > thresh[0]) & (S <= thresh[1])] = 1
     # 3) Return a binary image of threshold result
     return binary_output
 
