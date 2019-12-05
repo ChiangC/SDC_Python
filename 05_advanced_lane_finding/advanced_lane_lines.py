@@ -102,7 +102,13 @@ def hls_select(img, thresh=(0, 255)):
     return binary_output
 
 
-
+def rgb_select(image, thresh=(0, 255)):
+    R = image[:,:,0]
+#     G = image[:,:,1]
+#     B = image[:,:,2]
+    binary = np.zeros_like(R)
+    binary[(R > thresh[0]) & (R <= thresh[1])] = 1
+    return binary
 
 
 
