@@ -37,41 +37,41 @@ The code for this step is contained in the first code cell of the IPython notebo
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
 ####advanced_lane_lines.py(Lines 12 through 34)
-```python
-def get_objpoints_imgpoints(images):
-    # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
-    objp = np.zeros((6*9,3), np.float32)
-    objp[:,:2] = np.mgrid[0:9,0:6].T.reshape(-1,2)
 
-    # Arrays to store object points and image points from all the images.
-    objpoints = [] # 3d points in real world space
-    imgpoints = [] # 2d points in image plane.
-    
-    # Step through the list and search for chessboard corners
-    for fname in images:
-        img = cv2.imread(fname)
-        gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+	def get_objpoints_imgpoints(images):
+	    # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
+	    objp = np.zeros((6*9,3), np.float32)
+	    objp[:,:2] = np.mgrid[0:9,0:6].T.reshape(-1,2)
+	
+	    # Arrays to store object points and image points from all the images.
+	    objpoints = [] # 3d points in real world space
+	    imgpoints = [] # 2d points in image plane.
+	    
+	    # Step through the list and search for chessboard corners
+	    for fname in images:
+	        img = cv2.imread(fname)
+	        gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+	
+	        # Find the chessboard corners
+	        ret, corners = cv2.findChessboardCorners(gray, (9,6),None)
+	
+	        # If found, add object points, image points
+	        if ret == True:
+	            objpoints.append(objp)
+	            imgpoints.append(corners)
+	    
+	    return objpoints, imgpoints
 
-        # Find the chessboard corners
-        ret, corners = cv2.findChessboardCorners(gray, (9,6),None)
 
-        # If found, add object points, image points
-        if ret == True:
-            objpoints.append(objp)
-            imgpoints.append(corners)
-    
-    return objpoints, imgpoints
 
-```
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 ####advanced_lane_lines.py(Lines 37 through 41)
-```python
-def cal_undistort(img, objpoints, imgpoints):
-    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, img.shape[1::-1], None, None)
-    undist = cv2.undistort(img, mtx, dist, None, mtx)
-    return undist
 
-```
+	def cal_undistort(img, objpoints, imgpoints):
+	    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, img.shape[1::-1], None, None)
+	    undist = cv2.undistort(img, mtx, dist, None, mtx)
+	    return undist
+
 
 ![Undistorted_Outuput_Chessboard](./output_images/undistorted_output_chessboard.png)
 
@@ -88,33 +88,32 @@ I used a combination of color(R channel and S channel) and gradient(sobel x ,sob
 
 ![S_R_Gradients_Result](./output_images/combine_color_gradient_binary_out_01.png)
 ![Combine_S_R_Gradients_Result](./output_images/combine_color_gradient_binary_out_02.png)
->As output images shown above,with combination of color(R channel and S channel) and gradient(sobel x ,sobel y, direction and magnitude) thresholds, lane lines were successfully detected in shadow and strong light conditions.
+>As shown in output images above,with combination of color(R channel and S channel) and gradient(sobel x ,sobel y, direction and magnitude) thresholds, lane lines were clearly seperated out from other lines in shadow and strong light conditions.
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `advanced_lane_lines.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `advanced_lane_lines.py` .  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
-```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
-```
+	src = np.float32(
+	    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
+	    [((img_size[0] / 6) - 10), img_size[1]],
+	    [(img_size[0] * 5 / 6) + 60, img_size[1]],
+	    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
+	dst = np.float32(
+	    [[(img_size[0] / 4), 0],
+	    [(img_size[0] / 4), img_size[1]],
+	    [(img_size[0] * 3 / 4), img_size[1]],
+	    [(img_size[0] * 3 / 4), 0]])
+
 
 This resulted in the following source and destination points:
-
-| Source        | Destination   | 
-|:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+	
+| Source        | Destination  | 
+| ------------- |--------------| 
+| 585, 460      | 320, 0       | 
+| 203, 720      | 320, 720     |
+| 1127, 720     | 960, 720     |
+| 695, 460      | 960, 0       |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
@@ -123,14 +122,27 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:(I did this in lines `72` through `361` in my code in `advanced_lane_lines.py`)
+
+Firstly, determine the x-position of the base of the lane lines by create a histogram with the above warped image. 
+Secondly, find pixels belonging to each line through the sliding window method.
+Thirdly, fit a polynomial to all the relevant pixels found in sliding windows , and cache the polynomial to skip the sliding window. If lines not detected from prior, search by sliding window.
 
 
-![alt text](./output_images/perspective_transform_binary_out.png)
+1. ddfdfd
+2. 2
+3. ee
+4. eer
+5. der
+6. erer
+7. 
+
+
+![alt text](./output_images/)
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+I did this in lines `365` through `393` in my code in `advanced_lane_lines.py`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
