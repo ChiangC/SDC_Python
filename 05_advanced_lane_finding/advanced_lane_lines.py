@@ -394,7 +394,7 @@ def measure_curvature_vehicle_position(binary_warped, left_fit, right_fit, ym_pe
 
 #=========================
 #Warp the detected lane boundaries back onto the original image
-def warp_lane_boundaries_onto_origin(undistorted, binary_warped, left_line, right_line, M_inverse):
+def map_lane(undistorted, binary_warped, left_line, right_line, M_inverse):
     ploty = np.linspace(0, binary_warped.shape[0]-1, binary_warped.shape[0] )
     left_fitx = left_line.recent_xfitted
     right_fitx = right_line.recent_xfitted
@@ -434,16 +434,16 @@ def warp_lane_boundaries_onto_origin(undistorted, binary_warped, left_line, righ
 #Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position
 def draw_curvature_vehicle_position_info(img, curvature, distance_from_center):
     font = cv2.FONT_HERSHEY_SIMPLEX
-    radius_text = "Radius of Curvature = %sm" % (round(curvature))
+    radius_info = "Radius of Curvature = %sm" % (round(curvature))
 
     if distance_from_center > 0:
-        pos_flag = 'right'
+        pos = 'right'
     else:
-        pos_flag = 'left'
+        pos = 'left'
 
-    cv2.putText(img, radius_text, (36, 36), font, 1.3, (255, 255, 255), 2)
-    center_text = "Vehicle is %.3fm %s of center" % (abs(distance_from_center), pos_flag)
-    cv2.putText(img, center_text, (36, 72), font, 1.3, (255, 255, 255), 2)
+    cv2.putText(img, radius_info, (36, 36), font, 1.3, (255, 255, 255), 2)
+    center_info = "Vehicle is %.3fm %s of center" % (abs(distance_from_center), pos)
+    cv2.putText(img, center_info, (36, 72), font, 1.3, (255, 255, 255), 2)
     cv2.putText(img, "chiangchuna@gmail.com", (36, img.shape[0] - 36), font, 1.3, (255, 255, 255), 2)
     return img
 

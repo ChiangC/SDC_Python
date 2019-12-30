@@ -129,26 +129,19 @@ Secondly, find pixels belonging to each line through the sliding window method.
 Thirdly, fit a polynomial to all the relevant pixels found in sliding windows , and cache the polynomial to skip the sliding window. If lines not detected from prior, search by sliding window.
 
 
-1. ddfdfd
-2. 2
-3. ee
-4. eer
-5. der
-6. erer
-7. 
-
-
-![alt text](./output_images/)
+![alt text](./output_images/warped_fit_polynomial_output.png)
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
 I did this in lines `365` through `393` in my code in `advanced_lane_lines.py`
 
+
+
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I implemented this step in lines `396` through `431` in my code in `advanced_lane_lines.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
-![alt text][image6]
+![alt text](./output_images/warped_output.png)
 
 ---
 
@@ -156,7 +149,9 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output_videos/test_project_video.mp4)
+
+
 
 ---
 
