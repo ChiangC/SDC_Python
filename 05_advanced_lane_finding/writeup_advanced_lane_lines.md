@@ -32,7 +32,7 @@ The goals / steps of this project are the following:
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-The code for this step is contained in the first code cell of the IPython notebook located in "./Advanced_Lane_Lines.ipynb" (or in lines #12 through  #34 of the file called `advanced_lane_lines.py`).  
+The code for this step is contained in the first code cell of the IPython notebook located in "./Advanced_Lane_Lines.ipynb" (or in lines `12` through  `34` of the file called `advanced_lane_lines.py`).  
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
@@ -84,7 +84,7 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color(R channel and S channel) and gradient(sobel x ,sobel y, direction and magnitude) thresholds to generate a binary image (thresholding steps at lines #529 through #578 in `advanced_lane_lines.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of color(R channel and S channel) and gradient(sobel x ,sobel y, direction and magnitude) thresholds to generate a binary image (thresholding steps at lines `451` through `580` in `advanced_lane_lines.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 
 ![S_R_Gradients_Result](./output_images/combine_color_gradient_binary_out_01.png)
 ![Combine_S_R_Gradients_Result](./output_images/combine_color_gradient_binary_out_02.png)
@@ -92,7 +92,7 @@ I used a combination of color(R channel and S channel) and gradient(sobel x ,sob
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `advanced_lane_lines.py` .  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `warper()`, which appears in lines `45` through `68` in the file `advanced_lane_lines.py` .  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 	src = np.float32(
 	    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
@@ -135,6 +135,29 @@ Thirdly, fit a polynomial to all the relevant pixels found in sliding windows , 
 
 I did this in lines `365` through `393` in my code in `advanced_lane_lines.py`
 
+**1).For calculating the radius of curvature of the lane:**
+I located the lane line pixels, used their x and y pixel positions to fit a second order polynomial curve:
+
+$f(y) = Ay^2 + By + C$
+
+According to the 
+
+${\LARGE R_{curve} = \frac{[1 + (\frac{dx}{dy})^2]^{3/2}}{|\frac{d^2x}{dy^2}|}}$
+
+In the case of the second order polynomial above, the first and second derivatives are:
+
+${\large f'(y) = \frac{dx}{dy} = 2Ay + B}$
+
+${\large f''(y) = \frac{d^2x}{dy^2} = 2A}$
+
+So, our equation for radius of curvature becomes:
+
+${\LARGE R_{curve} = \frac{(1 + (2Ay + B)^2)^{3/2}}{\left |2A \right |}}$
+
+The ${y}$ values of the image increase from top to bottom, so I measure the radius of curvature closest to the vehicle, by evaluating the formula above at the ${y}$ value corresponding to the bottom of the image.
+
+**2).For the position of the vehicle with respect to center:**
+I assume the camera is mounted at the center of the car, such that the lane center is the midpoint at the bottom of the image between the two lines I've detected. The offset of the lane center from the center of the image (converted from pixels to meters) is my distance from the center of the lane.
 
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
@@ -160,3 +183,7 @@ Here's a [link to my video result](./output_videos/test_project_video.mp4)
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+
+* It is really a challenge to detect lane lines under different lighting conditions. So instead of using HLS space alone, I combined HLS space with RGB space(S channel and R channel) , and it turns out this combination of color thresholds doing a fairly robust job of picking up the lines under very different color and contrast conditions.
+
+* My pipeline may fail when the road condition is not good. I might improve it by improving image quality and enhancing lane line feature information.
