@@ -1,0 +1,60 @@
+
+Paper that introduced the Xavier initialisation - http://proceedings.mlr.press/v9/glorot10a.html
+
+Paper highlighting the importance of normalisation - https://arxiv.org/abs/1901.09321
+
+2015 paper that won ImageNet - https://arxiv.org/abs/1502.01852
+
+The importance of having good initial parameters - https://arxiv.org/abs/1511.06422
+
+Batch normalization - https://arxiv.org/abs/1502.03167
+
+Layer normalization - https://arxiv.org/abs/1607.06450
+
+Instance normalization - https://arxiv.org/abs/1607.08022
+
+Group normalization - https://arxiv.org/abs/1803.08494
+
+Adam paper - https://arxiv.org/abs/1412.6980
+
+Regularization vs. normalization - https://arxiv.org/abs/1706.05350
+
+
+
+Understanding the difficulty of training deep feedforward neural nets - http://proceedings.mlr.press/v9/glorot10a.html
+Fixup initialization (Paper showing the importance of normalization) - https://arxiv.org/abs/1901.09321
+Self Normalizing neural nets - https://arxiv.org/abs/1706.02515
+An advanced initialization method - https://arxiv.org/abs/1511.06422
+Rectifiers- https://arxiv.org/abs/1502.01852
+Batch normalization - https://arxiv.org/abs/1502.03167
+Layer normalization - https://arxiv.org/abs/1607.06450
+Instance normalization - https://arxiv.org/abs/1607.08022
+Small batch training for deep neural nets - https://arxiv.org/abs/1804.07612
+Weight decay regularization - https://arxiv.org/abs/1810.12281
+
+Pre-process images
+http://cs231n.github.io/neural-networks-2/#datapre
+
+No, you can use ReLUs after fully-connected layers as well.
+Usually, the ReLU activation is the most preferred in neural nets.
+You can find the detailed differences about these activation functions at -
+http://cs231n.github.io/neural-networks-1/#actfun
+
+Yes, dropout is only used during training.
+You shouldn't use it while validating / testing your model.
+You can find a detailed explanation at -
+https://stackoverflow.com/questions/44223585/why-disable-dropout-during-validation-and-testing
+
+
+
+Ideally, you should be testing out your model with both the grayscale as well as the colored images, 
+and then choose the one that performs better. Does this answer your question?
+
+
+
+
+
+
+
+
+
