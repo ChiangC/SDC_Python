@@ -50,6 +50,26 @@ https://stackoverflow.com/questions/44223585/why-disable-dropout-during-validati
 Ideally, you should be testing out your model with both the grayscale as well as the colored images, 
 and then choose the one that performs better. Does this answer your question?
 
+Here’s a good resource that you can follow to understand the math behind these formulae -
+
+http://www.cogprints.org/5869/1/cnn_tutorial.pdf
+
+However, be prepared to spend some significant amount of time to fully grasp the entire paper.
+
+You can also get some gentle explanations at the following links -
+
+https://towardsdatascience.com/gentle-dive-into-math-behind-convolutional-neural-networks-79a07dd44cf9
+
+https://www.youtube.com/watch?v=KTB_OFoAQcc&list=PLkDaE6sCZn6Gl29AoE31iwdVwSG-KnDzF&index=7&t=1s
+
+https://www.youtube.com/watch?v=jPOAS7uCODQ&list=PLkDaE6sCZn6Gl29AoE31iwdVwSG-KnDzF&index=8&t=0s
+
+https://www.youtube.com/watch?v=3PyJA9AfwSk&list=PLkDaE6sCZn6Gl29AoE31iwdVwSG-KnDzF&index=9
+
+https://www.youtube.com/watch?v=bXJx7y51cl0&list=PLkDaE6sCZn6Gl29AoE31iwdVwSG-KnDzF&index=11
+
+
+
 
 
 
