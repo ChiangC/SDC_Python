@@ -20,8 +20,12 @@ for line in lines:
         source_path = line[i]
         filename = source_path.split('/')[-1]
         current_path = './data/IMG/'+filename
-        
+        image = cv2.imread(current_path)
+        images.append(image)
+        measurement = float(line[3])
+        measurements.append(measurement)
 
+#Data augmentation        
 augmented_images, augmented_measurements = [],[]
 for image, measurement in zip(images, measurements):
     augmented_images.append(image)
@@ -32,7 +36,10 @@ for image, measurement in zip(images, measurements):
 X_train = np.array(augmented_images)
 y_train = np.array(augmented_measurements)
 
-               
+#Use Keras to train a network to do the following:
+#1.Take in an image from the center camera of the car. This is the input to your neural network.
+#2.Output a new steering angle for the car. 
+
 model = Sequential()
 # set up lambda layer
 model.add(Lambda(lambda x:x/255.0 - 0.5, input_shape=(160, 320, 3))
@@ -41,14 +48,17 @@ model.add(Copping2D(cropping=((70,25),(0,0))))
 # model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160,320,3)))
 
 #LeNet
-model.add(Convolution2D(6, 5, 5, activation="relu"))
-model.add(MaxPooling2D())
-model.add(Convolution2D(6, 5, 5, activation="relu"))
-model.add(MaxPooling2D())
-model.add(Flatten())
-model.add(Dense(120))
-model.add(Dense(84))
-model.add(Dense(1))
+# model.add(Convolution2D(6, 5, 5, activation="relu"))
+# model.add(MaxPooling2D())
+# model.add(Convolution2D(6, 5, 5, activation="relu"))
+# model.add(MaxPooling2D())
+# model.add(Flatten())
+# model.add(Dense(120))
+# model.add(Dense(84))
+# model.add(Dense(1))
+          
+          
+          
 model.compile(loss='mse', optimizer='adam')
 model.fit(X_train, y_train, validation_split=0.2, shuffle=True, nb_epoch=5)
 
