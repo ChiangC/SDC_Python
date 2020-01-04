@@ -21,6 +21,9 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 
+#Disable GPU
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"  
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 class SimplePIController:
     def __init__(self, Kp, Ki):
