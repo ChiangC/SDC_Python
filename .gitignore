@@ -102,3 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+07_behavioral_cloning/data/
+07_behavioral_cloning/run1/
+06_traffic_sign_classifier/GTSRB/
+05_advanced_lane_finding/output_videos/output_challenge_video_v2.mp4
+07_behavioral_cloning/run1_03.mp4
+07_behavioral_cloning/run1_02.mp4
+07_behavioral_cloning/run1_01.mp4
