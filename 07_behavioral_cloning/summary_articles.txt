@@ -9,31 +9,5 @@ https://medium.com/@gruby/behaviour-cloning-learning-driving-pattern-c029962a0bb
 
 https://medium.com/typeiqs/behavioral-cloning-5aaafc2e8745
 
-Data Preprocessing
 
-equivalent 
-
-lateral 
-
-perturbation
-
-zig zag 
-
-
-confounding 
-
-Consultant 
-
-recolected
-
-perturbations 
-
-circuit
-
-enthusiast 
-
-interventions 
-
-
-
-《埃及艳后》
+https://devblogs.nvidia.com/deep-learning-self-driving-cars/
