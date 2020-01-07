@@ -79,18 +79,13 @@ For details about how I created the training data, see the next section.
 ### Model Architecture and Training Strategy
 
 #### 1. Solution Design Approach
-
-The overall strategy for deriving a model architecture was to ...
-
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+My first step was to use a convolution neural network model similar to the LeNet network, I thought this model might be appropriate because I used it for traffic sign classifier project. But it turns out to has bad performace on this project. The reason for it's bad performance may be it has only two convolution layers. So I built my model based on NVIDIA network which has more convolution layers.
 
 In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
 
-To combat the overfitting, I modified the model so that ...
+To combat the overfitting, I modified the model and add a droput layer after the first full-connection layer.
 
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
+The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track, to improve the driving behavior in these cases, I collect more data by focusing on driving smoothly around curves.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
