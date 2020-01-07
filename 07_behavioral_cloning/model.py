@@ -14,8 +14,7 @@ from keras.models import Model
 import sklearn
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
-    
-        
+       
 ########################################################################
 #Model Architecture
 ########################################################################
@@ -39,9 +38,7 @@ model.add(Flatten())
 model.add(Dense(100))
 model.add(Dropout(0.5))
 model.add(Dense(50))
-# model.add(Dropout(0.5))
 model.add(Dense(10))
-# model.add(Dropout(0.5))
 model.add(Dense(1))
 
 ########################################################################
@@ -81,19 +78,21 @@ def generator(samples, batch_size=32):
 #                 steering_right = steering_center
                 # read in images from center, left and right cameras
                 path = "./data/IMG/" 
-                img_center = np.asarray(Image.open(path + row[0].split('\\')[-1]))
-                img_left = np.asarray(Image.open(path + row[1].split('\\')[-1]))
-                img_right = np.asarray(Image.open(path + row[2].split('\\')[-1]))
+                center_path = path + row[0].split(os.sep)[-1]
+                left_path = path + row[1].split(os.sep)[-1]
+                right_path = path + row[2].split(os.sep)[-1]
+                if os.path.exists(center_path) and os.path.exists(left_path) and os.path.exists(right_path):
+                    img_center = np.asarray(Image.open(center_path))
+                    img_left = np.asarray(Image.open(left_path))
+                    img_right = np.asarray(Image.open(right_path))
 
-                # add images and angles to data set
-                images.append(img_center)
-                images.append(img_left)
-                images.append(img_right)
-                angles.append(steering_center)
-                angles.append(steering_left)
-                angles.append(steering_right)
-#                 images.extend(img_center, img_left, img_right)
-#                 angles.extend(steering_center, steering_left, steering_right)
+                    # add images and angles to data set
+                    images.append(img_center)
+                    images.append(img_left)
+                    images.append(img_right)
+                    angles.append(steering_center)
+                    angles.append(steering_left)
+                    angles.append(steering_right)
 
             augmented_images, augmented_measurements = data_augment(images, angles)
             X_train = np.array(augmented_images)
