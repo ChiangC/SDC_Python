@@ -26,8 +26,7 @@ model = Sequential()
 #Set up lambda layer
 model.add(Lambda(lambda x: x/255.0 - 0.5, input_shape=(160, 320, 3)))
 #Cropping2D Layer
-# model.add(Cropping2D(cropping=((70,25),(0,0))))
-model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160,320,3)))
+model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160,320,3)))#(70,25)
 
 model.add(Conv2D(24, (5, 5), strides=(2, 2), activation="relu"))
 model.add(Conv2D(36, (5,5), strides=(2,2), activation="relu"))

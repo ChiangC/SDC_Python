@@ -53,22 +53,22 @@ The model.py file contains the code for training and saving the convolution neur
 ### Model Architecture and Training Strategy
 
 #### 1. An appropriate model architecture has been employed
-My model based on NVIDIA network consists of **9 layers**, including **a normalization layer**, **5 convolutional layers**(with 3x3 5x5 filter sizes depths between 24 and 64), and **3 fully connected layers**. (**model.py lines `26 - 45`**) 
+My model based on NVIDIA network consists of **9 layers**, including **a normalization layer**, **5 convolutional layers**(with 3x3 5x5 filter sizes depths between 24 and 64), and **3 fully connected layers**. (**model.py lines `25 - 41`**) 
 Here is the structure:
 
 ![](./images/model_summary.png)
 
-The model includes RELU activation to introduce nonlinearity (code lines `33 - 37`), and the data is normalized in the model using a Keras lambda layer (code line `28`). 
+The model includes RELU activation to introduce nonlinearity (code lines `31 - 35`), and the data is normalized in the model using a Keras lambda layer (code line `27`). 
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 40). 
+The model contains dropout layers in order to reduce overfitting (model.py lines `38`). 
 
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line `112-118`). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model was trained and validated on different data sets to ensure that the model was not overfitting (code line `110-116`). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 #### 3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line `122`).
+The model used an adam optimizer, so the learning rate was not tuned manually (model.py line `120`).
 
 #### 4. Appropriate training data
 
@@ -91,7 +91,7 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines `26-45`) consisted of **a normalization layer**, **5 convolutional layers**(with 3x3 5x5 filter sizes depths between 24 and 64), and **3 fully connected layers**.
+The final model architecture (model.py lines `25-41`) consisted of **a normalization layer**, **5 convolutional layers**(with 3x3 5x5 filter sizes depths between 24 and 64), and **3 fully connected layers**.
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
@@ -122,7 +122,7 @@ To augment the data sat, I also flipped images and angles thinking that this wou
 ![](./images/center_01_flipped.jpg)
 
 
-After the collection process, I had 34998 number of data points. I trained these data on local machine with GPU, and I used generators(model.py lines `63-101`) because this is much more memory-efficient.
+After the collection process, I had 34998 number of data points. I trained these data on local machine with GPU, and I used generators(model.py lines `59-116`) because this is much more memory-efficient.
 
 
 I finally randomly shuffled the data set and put `30%` of the data into a validation set. 
