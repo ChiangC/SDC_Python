@@ -11,3 +11,10 @@ https://medium.com/typeiqs/behavioral-cloning-5aaafc2e8745
 
 
 https://devblogs.nvidia.com/deep-learning-self-driving-cars/
+
+Self-driving car in a simulator with a tiny neural network
+https://medium.com/@xslittlegrass/self-driving-car-in-a-simulator-with-a-tiny-neural-network-13d33b871234#.2ugw8o56l
+
+
+How Udacity’s Self-Driving Car Students Approach Behavioral Cloning
+https://medium.com/udacity/how-udacitys-self-driving-car-students-approach-behavioral-cloning-5ffbfd2979e5
