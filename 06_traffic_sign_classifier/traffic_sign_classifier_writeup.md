@@ -51,6 +51,17 @@ signs data set:
 * The shape of a traffic sign image is ?
 * The number of unique classes/labels in the data set is ?
 
+Number of training examples = 34799
+
+Number of validation examples = 4410
+
+Number of testing examples = 12630
+
+Image data shape = (32, 32, 3)
+
+Number of classes = 43
+
+
 #### 2. Include an exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
