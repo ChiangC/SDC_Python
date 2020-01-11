@@ -63,24 +63,13 @@ Here is an exploratory visualization of the data set.
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to convert the images to grayscale because ...
+As a first step, I decided to convert the images to grayscale because it can keep as much information as possible in the image, but remove these extra channels not needed.Thus it can make computing more efficient.
 
 Here is an example of a traffic sign image before and after grayscaling.
 
 ![alt text](./images/grayscale.png "Grayscaling")
 
-As a last step, I normalized the image data because ...
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
-
+As a last step, I normalized the image data because it makes it much easier for the optimization to proceed numerically, and speed up the convergence of neural network.
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
@@ -113,9 +102,9 @@ To train the model, I used an `adam optimizer`, with a learning rate `0.003`, ba
 
 My final model results were:
 
-* training set accuracy of `0.990`
-* validation set accuracy of `0.960`
-* test set accuracy of `0.928`
+* training set accuracy of `0.989`
+* validation set accuracy of `0.941`
+* test set accuracy of `0.930`
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -130,7 +119,7 @@ If a well known architecture was chosen:
 * Why did you believe it would be relevant to the traffic sign application?
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
 
-My model architercture based on LeNet architercture. I choosed LeNet architecture because , traffic sign data have samilarity with mnist data in features. At first, I trained the model with full color RGB image,but it got a validation accuray less than 0.9 after 10 epochs, even I increased training epochs and added dropout layer to fully-connected layers. So I turned to train the model with grayscaled and normalized images data, it can easily reach a validation accuracy of 0.93 after 10 epochs. After that, I tuned learning rate to 0.003 to speed up the training, and it performs well and could get a validation accuracy of 0.96.
+My model architercture based on LeNet architercture. I choosed LeNet architecture because , traffic sign data have samilarity with mnist data in features. At first, I trained the model with full color RGB image,but it got a validation accuray less than 0.9 after 10 epochs, even I increased training epochs and added dropout layer to fully-connected layers. So I turned to train the model with grayscaled and normalized images data, it can easily reach a validation accuracy of 0.93 after 10 epochs. After that, I tuned learning rate to 0.003 to speed up the training, and it performs well and could get a validation accuracy of 0.948.
 
 ### Test a Model on New Images
 
@@ -140,7 +129,7 @@ Here are ten German traffic signs that I found on the web:
 
 ![](./images/traffic_signs_from_net.png)
 
-The 6th image might be difficult to classify because it is rotated and is samilar to other traffic signs.
+The 8th image might be difficult to classify because it is rotated and is samilar to other traffic signs.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -148,26 +137,26 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Yield        		    | Yield   									    | 
-| Children crossing     | Right-of-way at the next intersection			|
-| Stop					| Stop sign										|
-| Wild animals crossing	| Dangerous curve to the right		            |
-| Dangerous curve to the right| Go straight or right     		        |
-| Road narrows on the right | Priority road   				            | 
-| Turn right ahead      | Turn right ahead	        					|
-| Roundabout mandatory	| Roundabout mandatory			                |
-| Speed limit (70km/h)	| Speed limit (70km/h)				            |
-| Road work			    | Road work      							    |
+| Dangerous curve to the right | Go straight or right   				| 
+| Road work             | Road work			                            |
+| Speed limit (70km/h)	| Speed limit (70km/h)							|
+| Yield	                | Yield		                                    |
+| Stop                  | Stop     		                                |
+| Children crossing     | Children crossing   				            | 
+| Wild animals crossing | Slippery road  	        					|
+| Road narrows on the right	| Keep left		                            |
+| Roundabout mandatory	| Roundabout mandatory				            |
+| Turn right ahead		    | Turn right ahead      					|
 
 ![](./images/traffic_signs_from_net.png)
 
 
 
-The model was able to correctly guess `6 of the 10` traffic signs, which gives an accuracy of `60%`. This compares favorably to the accuracy on the test set of `92.8%`.
+The model was able to correctly guess `7 of the 10` traffic signs, which gives an accuracy of `70%`. This compares favorably to the accuracy on the test set of `93.0%`.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the `18th` cell of the Ipython notebook.
+The code for making predictions on my final model is located in the `17th` cell of the Ipython notebook.
 
 	def predict(images):
 	    predict_labels.clear()
@@ -185,11 +174,12 @@ For the third image, the model is relatively sure that this is a stop sign (prob
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| 9.99999642e-01         			| Stop sign   									| 
-| 2.59055895e-07     				| Yield 										|
-| 7.19243189e-08					| No entry										|
-| 1.63614882e-08      			    | No vehicles					 				|
-| 1.28286798e-10				    | No passing for vehicles over 3.5 metric tons  |
+| 9.93708014e-01        			| Go straight or right   			| 
+| 4.06718720e-03     				| Keep right						|
+| 1.23340928e-03					| End of all speed and passing limits|
+| 4.18403535e-04     			    | No entry					 	    |
+| 2.83835776e-04				    | Stop                              |
+
 
 The following shows all ten test traffic signs top five soft max probabilities.
 **predict class(true class)**
