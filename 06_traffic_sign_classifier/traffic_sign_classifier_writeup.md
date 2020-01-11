@@ -130,7 +130,7 @@ If a well known architecture was chosen:
 * Why did you believe it would be relevant to the traffic sign application?
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
 
-My model architercture based on LeNet architercture. At first, I trained the model with full color RGB image,but it got a validation accuray less than 0.9 after 10 epochs, even I increased training epochs and added dropout layer to fully-connected layers. So I turned to train the model with grayscaled and normalized images data, it can easily reach a validation accuracy of 0.93 after 10 epochs. After that, I tuned learning rate to 0.003 to speed up the training, and it performs well and could get a validation accuracy of 0.96.
+My model architercture based on LeNet architercture. I choosed LeNet architecture because , traffic sign data have samilarity with mnist data in features. At first, I trained the model with full color RGB image,but it got a validation accuray less than 0.9 after 10 epochs, even I increased training epochs and added dropout layer to fully-connected layers. So I turned to train the model with grayscaled and normalized images data, it can easily reach a validation accuracy of 0.93 after 10 epochs. After that, I tuned learning rate to 0.003 to speed up the training, and it performs well and could get a validation accuracy of 0.96.
 
 ### Test a Model on New Images
 
@@ -167,7 +167,7 @@ The model was able to correctly guess `6 of the 10` traffic signs, which gives a
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the `11th` cell of the Ipython notebook.
+The code for making predictions on my final model is located in the `18th` cell of the Ipython notebook.
 
 	def predict(images):
 	    predict_labels.clear()
