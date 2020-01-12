@@ -5,5 +5,6 @@ https://navoshta.com/traffic-signs-classification/
 https://becominghuman.ai/updated-my-99-40-solution-to-udacity-nanodegree-project-p2-traffic-sign-classification-5580ae5bd51f
 
 
-
+Paper:Multi-column deep neural network for traffic sign classification
+https://pdfs.semanticscholar.org/a27f/9defe663cca0793c21d9c6063e20743618bb.pdf
 
