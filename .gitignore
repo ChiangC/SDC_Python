@@ -121,3 +121,7 @@ venv.bak/
 07_behavioral_cloning/model_result/model_v3_with_dropout.h5
 07_behavioral_cloning/model_result/model_v2.h5
 07_behavioral_cloning/model_result/model_v10_correction0.1_with_datav1.h5
+04_finding_lane_lines/challenge_images2/
+04_finding_lane_lines/test_images2/
+04_finding_lane_lines/test_images_output2/
+04_finding_lane_lines/challenge_images1/
